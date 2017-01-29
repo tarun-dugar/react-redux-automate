@@ -1,3 +1,7 @@
 import { combineReducers } from 'redux';
-const rootReducer = combineReducers({});
+import AppReducer from '../modules/App/ducks/App';
+
+const rootReducer = combineReducers({
+  AppReducer
+});
 export default rootReducer;

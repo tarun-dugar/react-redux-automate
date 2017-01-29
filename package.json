@@ -1,10 +1,9 @@
 {
-  "name": "react-redux-gen",
+  "name": "team-dashboard",
   "version": "1.0.0",
-  "description": "feature wise generator for large react-redux apps",
+  "description": "Team dashboard feature from Strike",
   "main": "index.js",
-  "author": "Tarun Dugar",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack -p",
@@ -12,25 +11,35 @@
     "lint": "eslint src/"
   },
   "dependencies": {
-    "redux": "3.6.0",
+    "classnames": "2.2.5",
     "immutable": "3.8.1",
+    "isomorphic-fetch": "2.2.1",
     "react": "15.4.1",
     "react-dom": "15.4.1",
-    "react-redux": "5.0.1"
+    "react-redux": "5.0.1",
+    "react-router": "3.0.0",
+    "redux": "3.6.0",
+    "redux-api-middleware": "1.0.2"
   },
   "devDependencies": {
+    "autoprefixer": "6.6.0",
     "babel-core": "6.21.0",
     "babel-eslint": "7.1.1",
     "babel-loader": "6.2.10",
     "babel-preset-latest": "6.16.0",
     "babel-preset-react": "6.16.0",
+    "css-loader": "0.26.1",
     "eslint": "3.12.2",
     "eslint-config-airbnb": "13.0.0",
-    "eslint-loader": "^1.6.1",
+    "eslint-loader": "1.6.1",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.6.0",
+    "extract-text-webpack-plugin": "1.0.1",
     "html-webpack-plugin": "2.24.1",
+    "node-sass": "4.1.1",
+    "postcss-loader": "1.2.1",
+    "sass-loader": "4.1.1",
     "webpack": "1.14.0"
   }
 }

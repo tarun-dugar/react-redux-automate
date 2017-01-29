@@ -1,9 +1,8 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { apiMiddleware } from 'redux-api-middleware';
 import rootReducer from './rootReducer';
 
+const createStoreWithMiddleware = applyMiddleware(apiMiddleware)(createStore);
 export default function configureStore() {
-  const store = createStore(
-    rootReducer
-  );
-  return store;
+  return createStoreWithMiddleware(rootReducer);
 }
