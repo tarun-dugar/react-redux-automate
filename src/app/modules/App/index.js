@@ -1,18 +1,13 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadData } from './ducks/App';
-
-import SideBar from './components/SideBar';
+import { loadData } from '../../ducks/App';
 
 class App extends React.Component {
   render() {
     return (
       <main className="app">
-        <SideBar />
-        <div className="app__section">
-          {this.props.children}
-        </div>
+        {this.props.children}
       </main>
     );
   }

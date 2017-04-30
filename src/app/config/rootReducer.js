@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import AppReducer from '../modules/App/ducks/App';
+import AppReducer from '../ducks/App';
 
 const rootReducer = combineReducers({
   AppReducer
