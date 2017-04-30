@@ -18,7 +18,7 @@ module.exports = {
   'entry': [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './src/app/index.js'
+    './src/index.js'
   ],
   'module': {
     'loaders': [{
@@ -79,7 +79,7 @@ module.exports = {
   },
   'plugins': [
     new HtmlWebpackPlugin({
-      'template': './src/app/base-template.html'
+      'template': './src/base-template.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('styles/[name].css'),
