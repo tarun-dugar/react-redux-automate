@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-cli",
+  "name": "react-redux-automate",
   "version": "0.0.1",
   "description": "command line tool to develop react-redux apps",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tarun-dugar/react-redux-cli.git"
+    "url": "git+ssh://git@github.com/tarun-dugar/react-redux-automate.git"
   },
   "keywords": [
     "react",
@@ -23,9 +23,9 @@
   "author": "Tarun Dugar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tarun-dugar/react-redux-cli/issues"
+    "url": "https://github.com/tarun-dugar/react-redux-automate/issues"
   },
-  "homepage": "https://github.com/tarun-dugar/react-redux-cli#readme",
+  "homepage": "https://github.com/tarun-dugar/react-redux-automate#readme",
   "dependencies": {
     "commander": "2.9.0",
     "clui": "0.3.1",
