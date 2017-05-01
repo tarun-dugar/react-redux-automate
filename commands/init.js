@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var cwd = process.cwd();
 var chalk = require('chalk');
+var spawn = require('child_process').spawn;
 
 function fsWriteWebpack(appRoot) {
   var webpackTemplate = fs.readFileSync(path.join(__dirname, '../templates/webpack.config.txt'));
@@ -73,8 +74,20 @@ function fsWriteAppContainer(appRoot) {
   var appContainerTemplate = fs.readFileSync(path.join(__dirname, '../templates/App.container.txt'));
   fs.mkdirSync(appRoot + 'src/modules');
   fs.mkdirSync(appRoot + 'src/modules/App');
-  fs.writeFile(appRoot + 'src/modules/App/App.js', appContainerTemplate, function (err) {
+  fs.writeFile(appRoot + 'src/modules/App/index.js', appContainerTemplate, function (err) {
     return err && console.error(chalk.red(err));
+  });
+}
+
+function runYarn(appRoot) {
+  var yarn = spawn('yarn', {
+    cwd: path.join(cwd, appRoot)
+  });
+  yarn.stdout.on('data', function(data) {
+    console.log(data.toString());
+  });
+  yarn.stderr.on('data', function(data) {
+    console.error(chalk.red(data.toString()));
   });
 }
 
@@ -83,6 +96,10 @@ module.exports = function init(commanderInstance) {
     .command('init')
     .description('initialise new app')
     .action(function() {
+      if (process.argv.length !== 4) {
+        console.error(chalk.red('Please supply a folder name under which your app will be created: rc init <folder_name>'));
+        return;
+      }
       var appRoot = process.argv.pop() + '/';
       if (!fs.existsSync(path.join(cwd, appRoot))) {
         fs.mkdirSync(appRoot)
@@ -96,6 +113,7 @@ module.exports = function init(commanderInstance) {
         fsWriteGitignore(appRoot);
         fsWriteAppContainer(appRoot);
         fsWriteBaseTemplate(appRoot);
+        runYarn(appRoot);
       } else {
         console.error(chalk.red('The directory ' + appRoot + ' already exists!'));
       }
