@@ -1,8 +1,10 @@
+"use strict";
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const env = process.env.NODE_ENV === 'production' ? 'production' : 'dev';
 
 const sassLoaders = [
   'css-loader',
@@ -10,8 +12,47 @@ const sassLoaders = [
   'sass-loader?includePaths[]=' + (path.resolve(__dirname, './node_modules'))
 ];
 
+let plugins = [
+  new HtmlWebpackPlugin({
+    'template': './src/base-template.html'
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new ExtractTextPlugin('styles/[name].css'),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(env),
+    'process.env.APP_VERSION': JSON.stringify(require('./package.json').version)
+  }),
+  new webpack.LoaderOptionsPlugin({
+    'options': {
+      'context': __dirname,
+      'postcss': [autoprefixer({
+        'browsers': [
+          'Android 2.3',
+          'Android >= 4',
+          'Chrome >= 20',
+          'Firefox >= 24',
+          'Explorer >= 8',
+          'iOS >= 6',
+          'Opera >= 12',
+          'Safari >= 6'
+        ]
+      })]
+    }
+  })
+]
+
+if (env === 'production') {
+  plugins = plugins.concat([
+    new webpack.optimize.UglifyJsPlugin({
+      'sourceMap': true,
+      'minimize': true
+    }),
+    new webpack.optimize.AggressiveMergingPlugin()
+  ]);
+}
+
 module.exports = {
-  'devtool': 'inline-source-map',
+  'devtool': 'source-map',
   'node': {
     'fs': 'empty'
   },
@@ -26,11 +67,11 @@ module.exports = {
       'loader': 'file-loader?name=manifest.json!web-app-manifest-loader'
     }, {
       'test': /\.js$/,
-      'exclude': /node_modules|firebase-messaging-sw.js/,
+      'exclude': /node_modules/,
       'loader': 'react-hot-loader/webpack'
     }, {
       'test': /\.js$/,
-      'exclude': /node_modules|firebase-messaging-sw.js/,
+      'exclude': /node_modules/,
       'loader': 'babel-loader',
       'options': {
         'presets': [
@@ -65,9 +106,6 @@ module.exports = {
           }
         }
       ]
-    }, {
-      'test': /firebase-messaging-sw.js/,
-      'loader': 'file-loader?name=[name].[ext]'
     }]
   },
   'resolve': {
@@ -83,33 +121,5 @@ module.exports = {
     'historyApiFallback': true,
     'hot': true
   },
-  'plugins': [
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
-    new HtmlWebpackPlugin({
-      'template': './index.html'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('styles/[name].css'),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('dev'),
-      'process.env.APP_VERSION': JSON.stringify(require('./package.json').version)
-    }),
-    new webpack.LoaderOptionsPlugin({
-      'options': {
-        'context': __dirname,
-        'postcss': [autoprefixer({
-          'browsers': [
-            'Android 2.3',
-            'Android >= 4',
-            'Chrome >= 20',
-            'Firefox >= 24',
-            'Explorer >= 8',
-            'iOS >= 6',
-            'Opera >= 12',
-            'Safari >= 6'
-          ]
-        })]
-      }
-    })
-  ]
+  'plugins': plugins
 };

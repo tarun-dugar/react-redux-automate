@@ -79,6 +79,13 @@ function fsWriteAppContainer(appRoot) {
   });
 }
 
+function fsWriteStyles(appRoot) {
+  fs.mkdirSync(appRoot + 'src/styles');
+  fs.writeFile(appRoot + 'src/styles/main.scss', '', function (err) {
+    return err && console.error(chalk.red(err));
+  });
+}
+
 function runYarn(appRoot) {
   var yarn = spawn('yarn', {
     cwd: path.join(cwd, appRoot)
@@ -93,11 +100,11 @@ function runYarn(appRoot) {
 
 module.exports = function init(commanderInstance) {
   commanderInstance
-    .command('init')
+    .command('new')
     .description('initialise new app')
     .action(function() {
       if (process.argv.length !== 4) {
-        console.error(chalk.red('Please supply a folder name under which your app will be created: rc init <folder_name>'));
+        console.error(chalk.red('Please supply a folder name under which your app will be created: rr init <folder_name>'));
         return;
       }
       var appRoot = process.argv.pop() + '/';
@@ -113,6 +120,7 @@ module.exports = function init(commanderInstance) {
         fsWriteGitignore(appRoot);
         fsWriteAppContainer(appRoot);
         fsWriteBaseTemplate(appRoot);
+        fsWriteStyles(appRoot);
         runYarn(appRoot);
       } else {
         console.error(chalk.red('The directory ' + appRoot + ' already exists!'));
