@@ -1,4 +1,4 @@
-import React from 'react';
+module.exports = `import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -15,3 +15,5 @@ export default function() {
     </Router>
   );
 }
+
+`;

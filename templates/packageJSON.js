@@ -1,4 +1,4 @@
-{
+module.exports = `{
   "name": "",
   "version": "1.0.0",
   "description": "",
@@ -38,3 +38,5 @@
     "webpack-dev-server": "2.4.2"
   }
 }
+
+`;

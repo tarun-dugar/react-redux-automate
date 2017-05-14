@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+module.exports = `import { fromJS } from 'immutable';
 
 const initialState = fromJS({
   'isLoading': false
@@ -19,8 +19,12 @@ export default function reducer(state=initialState, action={}) {
 
 
 // action creators
-export function loadData() {
-  return {
-    'type': LOADING
-  };
-}
+const appActions = {
+  loadData() {
+    return {
+      'type': LOADING
+    };
+  } 
+};
+export appActions;
+`

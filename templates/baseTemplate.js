@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+module.exports = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,3 +9,5 @@
     <div id="app"></div>
 </body>
 </html>
+
+`;

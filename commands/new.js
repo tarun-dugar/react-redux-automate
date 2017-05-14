@@ -3,87 +3,66 @@ var path = require('path');
 var cwd = process.cwd();
 var chalk = require('chalk');
 var spawn = require('child_process').spawn;
+var util = require('../util');
+var webpackTemplate = require('../templates/webpack.config');
+var packageJSONTemplate = require('../templates/packageJSON');
+var rootReducerTemplate = require('../templates/rootReducer');
+var routesTemplate = require('../templates/routes');
+var storeTemplate = require('../templates/store');
+var appDucksTemplate = require('../templates/appDucks');
+var appContainerTemplate = require('../templates/appContainer');
+var entryScriptTemplate = require('../templates/entryScript');
+var gitignoreTemplate = require('../templates/gitignore');
+var baseTemplate = require('../templates/baseTemplate');
 
 function fsWriteWebpack(appRoot) {
-  var webpackTemplate = fs.readFileSync(path.join(__dirname, '../templates/webpack.config.txt'));
-  fs.writeFile(appRoot + 'webpack.config.js', webpackTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'webpack.config.js', webpackTemplate, util.fsShowGenericError);
 }
 
 function fsWritePackageJSON(appRoot) {
-  var packageJSONTemplate = fs.readFileSync(path.join(__dirname, '../templates/package.json.txt'));
-  fs.writeFile(appRoot + 'package.json', packageJSONTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'package.json', packageJSONTemplate, util.fsShowGenericError);
 }
 
 function fsWriteRootReducer(appRoot) {
-  var rootReducerTemplate = fs.readFileSync(path.join(__dirname, '../templates/rootReducer.txt'))
   fs.mkdirSync(appRoot + 'src');
   fs.mkdirSync(appRoot + 'src/config');
-  fs.writeFile(appRoot + 'src/config/rootReducer.js', rootReducerTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/config/rootReducer.js', rootReducerTemplate, util.fsShowGenericError);
 }
 
 function fsWriteRoutes(appRoot) {
-  var routesTemplate = fs.readFileSync(path.join(__dirname, '../templates/routes.txt'));
-  fs.writeFile(appRoot + 'src/config/routes.js', routesTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/config/routes.js', routesTemplate, util.fsShowGenericError);
 }
 
 function fsWriteStore(appRoot) {
-  var routesTemplate = fs.readFileSync(path.join(__dirname, '../templates/store.txt'));
-  fs.writeFile(appRoot + 'src/config/store.js', routesTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/config/store.js', storeTemplate, util.fsShowGenericError);
 }
 
 function fsWriteAppDucks(appRoot) {
-  var appDucksTemplate = fs.readFileSync(path.join(__dirname, '../templates/App.ducks.txt'));
   fs.mkdirSync(appRoot + 'src/ducks');
-  fs.writeFile(appRoot + 'src/ducks/App.js', appDucksTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/ducks/App.js', appDucksTemplate, util.fsShowGenericError);
 }
 
 function fsWriteEntryScript(appRoot) {
-  var entryScriptTemplate = fs.readFileSync(path.join(__dirname, '../templates/entryScript.txt'));
-  fs.writeFile(appRoot + 'src/index.js', entryScriptTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/index.js', entryScriptTemplate, util.fsShowGenericError);
 }
 
 function fsWriteGitignore(appRoot) {
-  var gitignoreTemplate = fs.readFileSync(path.join(__dirname, '../templates/gitignore.txt'));
-  fs.writeFile(appRoot + '.gitignore', gitignoreTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + '.gitignore', gitignoreTemplate, util.fsShowGenericError);
 }
 
 function fsWriteBaseTemplate(appRoot) {
-  var baseTemplate = fs.readFileSync(path.join(__dirname, '../templates/base-template.txt'));
-  fs.writeFile(appRoot + 'src/base-template.html', baseTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/base-template.html', baseTemplate, util.fsShowGenericError);
 }
 
 function fsWriteAppContainer(appRoot) {
-  var appContainerTemplate = fs.readFileSync(path.join(__dirname, '../templates/App.container.txt'));
   fs.mkdirSync(appRoot + 'src/modules');
   fs.mkdirSync(appRoot + 'src/modules/App');
-  fs.writeFile(appRoot + 'src/modules/App/index.js', appContainerTemplate, function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/modules/App/index.js', appContainerTemplate, util.fsShowGenericError);
 }
 
 function fsWriteStyles(appRoot) {
   fs.mkdirSync(appRoot + 'src/styles');
-  fs.writeFile(appRoot + 'src/styles/main.scss', '', function (err) {
-    return err && console.error(chalk.red(err));
-  });
+  fs.writeFile(appRoot + 'src/styles/main.scss', '', util.fsShowGenericError);
 }
 
 function runYarn(appRoot) {

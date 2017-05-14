@@ -1,6 +1,7 @@
-import { createStore } from 'redux';
+module.exports = `import { createStore } from 'redux';
 import rootReducer from './rootReducer';
 
 export default function configureStore() {
   return createStore(rootReducer);
 }
+`;

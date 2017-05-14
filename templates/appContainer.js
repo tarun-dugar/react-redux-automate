@@ -1,7 +1,7 @@
-import React from 'react';
+module.exports = `import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadData } from '../../ducks/App';
+import { appActions } as actions from '../../ducks/App';
 
 class App extends React.Component {
   render() {
@@ -28,3 +28,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+`;

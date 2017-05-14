@@ -1,4 +1,4 @@
-init
+new
 create module
 create duck
 create container

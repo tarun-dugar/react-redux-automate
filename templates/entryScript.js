@@ -1,4 +1,4 @@
-import React from 'react';
+module.exports = `import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import style from './styles/main.scss';
@@ -12,3 +12,4 @@ render(
   </Provider>,
   document.getElementById('app')
 );
+`;

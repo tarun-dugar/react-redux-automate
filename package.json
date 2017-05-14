@@ -1,4 +1,3 @@
-
 {
   "name": "react-redux-automate",
   "version": "0.0.1",
@@ -28,9 +27,10 @@
   },
   "homepage": "https://github.com/tarun-dugar/react-redux-automate#readme",
   "dependencies": {
-    "commander": "2.9.0",
+    "chalk": "1.1.3",
     "clui": "0.3.1",
+    "commander": "2.9.0",
     "figlet": "1.2.0",
-    "chalk": "1.1.3"
+    "replaceall": "^0.1.6"
   }
 }
